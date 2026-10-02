@@ -145,3 +145,211 @@ footer {
     text-align: center;
     padding: 30px 10px;
     color: #777
+;
+}
+
+@media (max-width: 600px) {
+    .inputs {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    header h1 {
+        font-size: 27px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>🌿 Nova Health</h1>
+    <p>Your Personal Health & Wellness Guide</p>
+</header>
+
+<div class="container">
+
+    <div class="profile">
+        <h2>👤 Your Profile</h2>
+
+        <div class="inputs">
+            <input type="number" id="age" placeholder="Age">
+            <input type="number" id="weight" placeholder="Weight (kg)">
+            <input type="number" id="height" placeholder="Height (cm)">
+        </div>
+
+        <button onclick="saveProfile()">Save My Profile</button>
+    </div>
+
+    <div class="dashboard">
+
+        <div class="card" onclick="showPlan('loss')">
+            <div class="icon">🔥</div>
+            <h3>Weight Loss</h3>
+            <p>Healthy food & exercise plan</p>
+        </div>
+
+        <div class="card" onclick="showPlan('gain')">
+            <div class="icon">💪</div>
+            <h3>Weight Gain</h3>
+            <p>Healthy calorie-rich foods</p>
+        </div>
+
+        <div class="card" onclick="showPlan('health')">
+            <div class="icon">❤️</div>
+            <h3>Health</h3>
+            <p>Daily healthy habits</p>
+        </div>
+
+        <div class="card" onclick="showPlan('wellness')">
+            <div class="icon">🌱</div>
+            <h3>Wellness</h3>
+            <p>Mind & body wellness</p>
+        </div>
+
+        <div class="card" onclick="showPlan('yoga')">
+            <div class="icon">🧘</div>
+            <h3>Yoga</h3>
+            <p>Simple yoga exercises</p>
+        </div>
+
+        <div class="card" onclick="showPlan('weather')">
+            <div class="icon">☀️</div>
+            <h3>Weather</h3>
+            <p>Weather & outdoor tips</p>
+        </div>
+
+    </div>
+
+    <div id="result">
+        <h2 id="resultTitle"></h2>
+        <div class="result-box" id="resultText"></div>
+    </div>
+
+</div>
+
+<footer>
+    © 2026 Nova Health 🌿
+</footer>
+
+<script>
+
+let user = {
+    age: 0,
+    weight: 0,
+    height: 0
+};
+
+function saveProfile() {
+
+    user.age = Number(document.getElementById("age").value);
+    user.weight = Number(document.getElementById("weight").value);
+    user.height = Number(document.getElementById("height").value);
+
+    if (!user.age || !user.weight || !user.height) {
+        alert("Please enter your age, weight and height.");
+        return;
+    }
+
+    let heightMeter = user.height / 100;
+    let bmi = user.weight / (heightMeter * heightMeter);
+
+    alert("Profile saved! Your BMI is " + bmi.toFixed(1));
+}
+
+function showPlan(type) {
+
+    let result = document.getElementById("result");
+    let title = document.getElementById("resultTitle");
+    let text = document.getElementById("resultText");
+
+    result.style.display = "block";
+
+    if (type === "loss") {
+        title.innerHTML = "🔥 Weight Loss Plan";
+        text.innerHTML = `
+        <b>Food:</b><br>
+        🥗 Vegetables and salads<br>
+        🍎 Fruits<br>
+        🥚 Eggs / protein-rich foods<br>
+        💧 Plenty of water<br><br>
+        <b>Exercise:</b><br>
+        🚶 30–45 minutes walking<br>
+        🏃 Light cardio<br>
+        🧘 Stretching & yoga
+        `;
+    }
+
+    else if (type === "gain") {
+        title.innerHTML = "💪 Weight Gain Plan";
+        text.innerHTML = `
+        <b>Food:</b><br>
+        🥛 Milk / curd<br>
+        🥜 Nuts and seeds<br>
+        🍚 Rice, roti and whole grains<br>
+        🥚 Eggs / other protein foods<br>
+        🍌 Bananas and other fruits<br><br>
+        <b>Exercise:</b><br>
+        🏋️ Strength training<br>
+        💪 Body-weight exercises<br>
+        😴 Proper sleep
+        `;
+    }
+
+    else if (type === "health") {
+        title.innerHTML = "❤️ Healthy Daily Routine";
+        text.innerHTML = `
+        🌅 Wake up at a consistent time<br>
+        💧 Drink enough water<br>
+        🥗 Eat balanced meals<br>
+        🚶 Stay physically active<br>
+        😴 Get adequate sleep<br>
+        📱 Take regular screen breaks
+        `;
+    }
+
+    else if (type === "wellness") {
+        title.innerHTML = "🌱 Wellness";
+        text.innerHTML = `
+        🧘 Practice relaxation<br>
+        🌳 Spend some time outdoors<br>
+        📖 Read or learn something new<br>
+        👨‍👩‍👧 Spend time with family and friends<br>
+        😴 Maintain a regular sleep schedule
+        `;
+    }
+
+    else if (type === "yoga") {
+        title.innerHTML = "🧘 Yoga";
+        text.innerHTML = `
+        🌿 <b>Beginner Yoga Routine</b><br><br>
+        1. Tadasana – 1 minute<br>
+        2. Cat-Cow – 10 repetitions<br>
+        3. Child's Pose – 1 minute<br>
+        4. Cobra Pose – 20 seconds<br>
+        5. Easy Sitting & breathing – 3 minutes
+        `;
+    }
+
+    else if (type === "weather") {
+        title.innerHTML = "☀️ Weather Tips";
+        text.innerHTML = `
+        🌡️ Hot days: drink water and avoid excessive heat.<br><br>
+        🌧️ Rainy days: carry an umbrella and be careful on slippery roads.<br><br>
+        ❄️ Cold days: dress appropriately and stay warm.
+        `;
+    }
+
+    result.scrollIntoView({
+        behavior: "smooth"
+    });
+}
+
+</script>
+
+</body>
+</html>
