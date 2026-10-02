@@ -353,3 +353,975 @@ function showPlan(type) {
 
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Nova Health</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f4f8f7;
+    color: #222;
+}
+
+header {
+    background: linear-gradient(135deg, #00a884, #00695c);
+    color: white;
+    padding: 25px 20px;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 32px;
+}
+
+header p {
+    margin-top: 8px;
+    opacity: 0.9;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+}
+
+.profile {
+    background: white;
+    border-radius: 18px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.profile h2 {
+    margin-bottom: 18px;
+}
+
+.inputs {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.field {
+    width: 100%;
+}
+
+.full {
+    grid-column: 1 / -1;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 16px;
+    background: white;
+}
+
+.unit-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+button {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    background: #00a884;
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+.dashboard {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.card {
+    background: white;
+    border-radius: 18px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+}
+
+.icon {
+    font-size: 35px;
+    margin-bottom: 8px;
+}
+
+.card h3 {
+    margin-bottom: 7px;
+}
+
+.card p {
+    color: #555;
+}
+
+#result {
+    display: none;
+    background: white;
+    border-radius: 18px;
+    padding: 20px;
+    margin-top: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+#resultTitle {
+    margin-bottom: 15px;
+    color: #00695c;
+}
+
+.result-box {
+    line-height: 1.8;
+}
+
+.result-box hr {
+    margin: 12px 0;
+    border: none;
+    border-top: 1px solid #ddd;
+}
+
+.notice {
+    background: #eef8f5;
+    padding: 12px;
+    border-radius: 10px;
+    margin-top: 12px;
+}
+
+footer {
+    text-align: center;
+    padding: 25px;
+    color: #666;
+}
+
+@media (max-width: 650px) {
+
+    .inputs {
+        grid-template-columns: 1fr;
+    }
+
+    .full {
+        grid-column: auto;
+    }
+
+    .dashboard {
+        grid-template-columns: 1fr;
+    }
+
+    header h1 {
+        font-size: 27px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>🌿 Nova Health</h1>
+    <p>Your Personal Health & Wellness Guide</p>
+</header>
+
+<div class="container">
+
+<!-- PROFILE -->
+<div class="profile">
+
+    <h2>👤 Your Profile</h2>
+
+    <div class="inputs">
+
+        <!-- NAME -->
+        <div class="field">
+            <label>Name</label>
+            <input
+                type="text"
+                id="name"
+                placeholder="Enter your name">
+        </div>
+
+        <!-- GENDER -->
+        <div class="field">
+            <label>Gender</label>
+
+            <select id="gender">
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
+        </div>
+
+        <!-- AGE YEARS -->
+        <div class="field">
+            <label>Age - Years</label>
+
+            <input
+                type="number"
+                id="ageYears"
+                min="0"
+                max="120"
+                placeholder="Years">
+        </div>
+
+        <!-- AGE MONTHS -->
+        <div class="field">
+            <label>Age - Months</label>
+
+            <input
+                type="number"
+                id="ageMonths"
+                min="0"
+                max="11"
+                placeholder="Months">
+        </div>
+
+        <!-- DOB DATE -->
+        <div class="field">
+            <label>Date of Birth</label>
+
+            <input
+                type="number"
+                id="dobDate"
+                min="1"
+                max="31"
+                placeholder="Date">
+        </div>
+
+        <!-- DOB MONTH -->
+        <div class="field">
+            <label>Birth Month</label>
+
+            <select id="dobMonth">
+
+                <option value="">Select Month</option>
+
+                <option value="January">January</option>
+                <option value="February">February</option>
+                <option value="March">March</option>
+                <option value="April">April</option>
+                <option value="May">May</option>
+                <option value="June">June</option>
+                <option value="July">July</option>
+                <option value="August">August</option>
+                <option value="September">September</option>
+                <option value="October">October</option>
+                <option value="November">November</option>
+                <option value="December">December</option>
+
+            </select>
+        </div>
+
+        <!-- DOB YEAR -->
+        <div class="field">
+            <label>Birth Year</label>
+
+            <input
+                type="number"
+                id="dobYear"
+                min="1900"
+                max="2100"
+                placeholder="Year">
+        </div>
+
+        <!-- WEIGHT -->
+        <div class="field">
+            <label>Weight</label>
+
+            <div class="unit-row">
+
+                <input
+                    type="number"
+                    id="weight"
+                    min="0"
+                    step="0.01"
+                    placeholder="Weight">
+
+                <select id="weightUnit">
+
+                    <option value="kg">Kg</option>
+                    <option value="gram">Gram</option>
+
+                </select>
+
+            </div>
+        </div>
+
+        <!-- HEIGHT -->
+        <div class="field">
+            <label>Height</label>
+
+            <div class="unit-row">
+
+                <input
+                    type="number"
+                    id="height"
+                    min="0"
+                    step="0.01"
+                    placeholder="Height">
+
+                <select id="heightUnit">
+
+                    <option value="feet">Feet</option>
+                    <option value="inch">Inch</option>
+                    <option value="cm">Centimeter</option>
+
+                </select>
+
+            </div>
+        </div>
+
+        <!-- SUBMIT -->
+        <div class="field full">
+
+            <button onclick="saveProfile()">
+                💾 Submit Profile
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- DASHBOARD -->
+<div class="dashboard">
+
+    <!-- WEIGHT LOSS -->
+    <div
+        class="card"
+        onclick="showPlan('loss')">
+
+        <div class="icon">🔥</div>
+
+        <h3>Weight Loss</h3>
+
+        <p>
+            Healthy food & exercise plan
+        </p>
+
+    </div>
+
+
+    <!-- WEIGHT GAIN -->
+    <div
+        class="card"
+        onclick="showPlan('gain')">
+
+        <div class="icon">💪</div>
+
+        <h3>Weight Gain</h3>
+
+        <p>
+            Healthy calorie-rich foods
+        </p>
+
+    </div>
+
+
+    <!-- HEALTH -->
+    <div
+        class="card"
+        onclick="showPlan('health')">
+
+        <div class="icon">❤️</div>
+
+        <h3>Health</h3>
+
+        <p>
+            Daily healthy habits
+        </p>
+
+    </div>
+
+
+    <!-- WELLNESS -->
+    <div
+        class="card"
+        onclick="showPlan('wellness')">
+
+        <div class="icon">🌿</div>
+
+        <h3>Wellness</h3>
+
+        <p>
+            Mind & body wellness
+        </p>
+
+    </div>
+
+
+    <!-- YOGA -->
+    <div
+        class="card"
+        onclick="showPlan('yoga')">
+
+        <div class="icon">🧘</div>
+
+        <h3>Yoga</h3>
+
+        <p>
+            Simple yoga exercises
+        </p>
+
+    </div>
+
+
+    <!-- WEATHER -->
+    <div
+        class="card"
+        onclick="showPlan('weather')">
+
+        <div class="icon">☀️</div>
+
+        <h3>Weather</h3>
+
+        <p>
+            Weather & outdoor tips
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- RESULT -->
+<div id="result">
+
+    <h2 id="resultTitle"></h2>
+
+    <div
+        class="result-box"
+        id="resultText">
+    </div>
+
+</div>
+
+</div>
+
+
+<footer>
+    © 2026 Nova Health 🌿
+</footer>
+
+
+<script>
+
+/* =========================
+   USER DATA
+========================= */
+
+let user = {
+
+    name: "",
+    gender: "",
+
+    ageYears: 0,
+    ageMonths: 0,
+
+    dobDate: "",
+    dobMonth: "",
+    dobYear: "",
+
+    weightKg: 0,
+    heightCm: 0
+
+};
+
+
+/* =========================
+   SAVE PROFILE
+========================= */
+
+function saveProfile() {
+
+    let name =
+        document.getElementById("name").value.trim();
+
+    let gender =
+        document.getElementById("gender").value;
+
+    let ageYears =
+        Number(document.getElementById("ageYears").value);
+
+    let ageMonths =
+        Number(document.getElementById("ageMonths").value);
+
+    let dobDate =
+        document.getElementById("dobDate").value;
+
+    let dobMonth =
+        document.getElementById("dobMonth").value;
+
+    let dobYear =
+        document.getElementById("dobYear").value;
+
+    let weight =
+        Number(document.getElementById("weight").value);
+
+    let weightUnit =
+        document.getElementById("weightUnit").value;
+
+    let height =
+        Number(document.getElementById("height").value);
+
+    let heightUnit =
+        document.getElementById("heightUnit").value;
+
+
+    /* VALIDATION */
+
+    if (!name) {
+
+        alert("Please enter your name.");
+
+        return;
+    }
+
+    if (!gender) {
+
+        alert("Please select Male or Female.");
+
+        return;
+    }
+
+    if (
+        ageYears < 0 ||
+        ageMonths < 0 ||
+        ageMonths > 11
+    ) {
+
+        alert("Please enter a valid age.");
+
+        return;
+    }
+
+    if (!dobDate || !dobMonth || !dobYear) {
+
+        alert("Please enter your complete Date of Birth.");
+
+        return;
+    }
+
+    if (!weight || weight <= 0) {
+
+        alert("Please enter your weight.");
+
+        return;
+    }
+
+    if (!height || height <= 0) {
+
+        alert("Please enter your height.");
+
+        return;
+    }
+
+
+    /* =========================
+       CONVERT WEIGHT TO KG
+    ========================= */
+
+    let weightKg;
+
+    if (weightUnit === "kg") {
+
+        weightKg = weight;
+
+    } else {
+
+        weightKg = weight / 1000;
+
+    }
+
+
+    /* =========================
+       CONVERT HEIGHT TO CM
+    ========================= */
+
+    let heightCm;
+
+    if (heightUnit === "cm") {
+
+        heightCm = height;
+
+    }
+
+    else if (heightUnit === "feet") {
+
+        heightCm = height * 30.48;
+
+    }
+
+    else if (heightUnit === "inch") {
+
+        heightCm = height * 2.54;
+
+    }
+
+
+    /* =========================
+       SAVE USER
+    ========================= */
+
+    user = {
+
+        name: name,
+        gender: gender,
+
+        ageYears: ageYears,
+        ageMonths: ageMonths,
+
+        dobDate: dobDate,
+        dobMonth: dobMonth,
+        dobYear: dobYear,
+
+        weightKg: weightKg,
+        heightCm: heightCm
+
+    };
+
+
+    /* SAVE IN PHONE */
+
+    localStorage.setItem(
+        "novaHealthUser",
+        JSON.stringify(user)
+    );
+
+
+    /* =========================
+       BMI
+    ========================= */
+
+    let heightMeter =
+        heightCm / 100;
+
+    let bmi =
+        weightKg /
+        (heightMeter * heightMeter);
+
+
+    /* =========================
+       SHOW SUCCESS
+    ========================= */
+
+    alert(
+        "Profile saved successfully!\n\n" +
+        "Name: " + name + "\n" +
+        "Gender: " + gender + "\n" +
+        "Age: " + ageYears +
+        " years " +
+        ageMonths +
+        " months\n" +
+        "Weight: " +
+        weightKg.toFixed(2) +
+        " kg\n" +
+        "Height: " +
+        heightCm.toFixed(1) +
+        " cm\n" +
+        "BMI: " +
+        bmi.toFixed(1)
+    );
+
+}
+
+
+/* =========================
+   LOAD SAVED PROFILE
+========================= */
+
+function loadProfile() {
+
+    let saved =
+        localStorage.getItem("novaHealthUser");
+
+    if (!saved) {
+        return;
+    }
+
+    try {
+
+        user = JSON.parse(saved);
+
+        document.getElementById("name").value =
+            user.name || "";
+
+        document.getElementById("gender").value =
+            user.gender || "";
+
+        document.getElementById("ageYears").value =
+            user.ageYears || "";
+
+        document.getElementById("ageMonths").value =
+            user.ageMonths || "";
+
+        document.getElementById("dobDate").value =
+            user.dobDate || "";
+
+        document.getElementById("dobMonth").value =
+            user.dobMonth || "";
+
+        document.getElementById("dobYear").value =
+            user.dobYear || "";
+
+    }
+
+    catch (error) {
+
+        console.log("Profile loading error");
+
+    }
+
+}
+
+
+/* =========================
+   SHOW PLANS
+========================= */
+
+function showPlan(type) {
+
+    let result =
+        document.getElementById("result");
+
+    let title =
+        document.getElementById("resultTitle");
+
+    let text =
+        document.getElementById("resultText");
+
+
+    result.style.display = "block";
+
+
+    /* =========================
+       WEIGHT LOSS
+    ========================= */
+
+    if (type === "loss") {
+
+        title.innerHTML =
+            "🔥 Weight Loss Plan";
+
+        text.innerHTML = `
+
+        <b>🥗 Food:</b><br>
+
+        🥦 Vegetables and salads<br>
+        🍎 Fruits<br>
+        🥚 Protein-rich foods<br>
+        💧 Drink enough water<br>
+        🍚 Choose balanced portions<br>
+        <br>
+
+        <b>🏃 Exercise:</b><br>
+
+        🚶 30–45 minutes walking<br>
+        🏃 Light cardio<br>
+        🧘 Stretching & yoga<br>
+        😴 Get enough sleep
+
+        <div class="notice">
+        Focus on gradual, sustainable changes rather than
+        extreme dieting.
+        </div>
+
+        `;
+
+    }
+
+
+    /* =========================
+       WEIGHT GAIN
+    ========================= */
+
+    else if (type === "gain") {
+
+        title.innerHTML =
+            "💪 Weight Gain Plan";
+
+        text.innerHTML = `
+
+        <b>🍽️ Food:</b><br>
+
+        🥛 Milk / curd<br>
+        🥜 Nuts and seeds<br>
+        🍚 Rice, roti and whole grains<br>
+        🥚 Eggs / other protein foods<br>
+        🍌 Bananas and other fruits<br>
+        🥑 Healthy calorie-rich foods<br>
+        <br>
+
+        <b>🏋️ Exercise:</b><br>
+
+        🏋️ Strength training<br>
+        💪 Body-weight exercises<br>
+        😴 Proper sleep
+
+        <div class="notice">
+        Increase food portions gradually and choose
+        nutritious foods.
+        </div>
+
+        `;
+
+    }
+
+
+    /* =========================
+       HEALTH
+    ========================= */
+
+    else if (type === "health") {
+
+        title.innerHTML =
+            "❤️ Healthy Daily Routine";
+
+        text.innerHTML = `
+
+        🌅 Wake up at a consistent time<br>
+        💧 Drink enough water<br>
+        🥗 Eat balanced meals<br>
+        🚶 Stay physically active<br>
+        😴 Get adequate sleep<br>
+        📱 Take regular screen breaks<br>
+        🧼 Maintain personal hygiene
+
+        `;
+
+    }
+
+
+    /* =========================
+       WELLNESS
+    ========================= */
+
+    else if (type === "wellness") {
+
+        title.innerHTML =
+            "🌿 Wellness";
+
+        text.innerHTML = `
+
+        🧘 Practice relaxation<br>
+        🌳 Spend some time outdoors<br>
+        📖 Read or learn something new<br>
+        👨‍👩‍👧 Spend time with family and friends<br>
+        😴 Maintain a regular sleep schedule<br>
+        💧 Stay hydrated
+
+        `;
+
+    }
+
+
+    /* =========================
+       YOGA
+    ========================= */
+
+    else if (type === "yoga") {
+
+        title.innerHTML =
+            "🧘 Yoga";
+
+        text.innerHTML = `
+
+        🌿 <b>Beginner Yoga Routine</b><br><br>
+
+        1. Tadasana — 1 minute<br>
+        2. Cat-Cow — 10 repetitions<br>
+        3. Child's Pose — 1 minute<br>
+        4. Cobra Pose — 20 seconds<br>
+        5. Easy Sitting & breathing — 3 minutes
+
+        <div class="notice">
+        Stop if an exercise causes pain or discomfort.
+        </div>
+
+        `;
+
+    }
+
+
+    /* =========================
+       WEATHER
+    ========================= */
+
+    else if (type === "weather") {
+
+        title.innerHTML =
+            "☀️ Weather Tips";
+
+        text.innerHTML = `
+
+        🌡️ Hot days: drink water and avoid excessive heat.
+        <br><br>
+
+        🌧️ Rainy days: carry an umbrella and be careful
+        on slippery roads.
+        <br><br>
+
+        ❄️ Cold days: dress appropriately and stay warm.
+
+        `;
+
+    }
+
+
+    result.scrollIntoView({
+        behavior: "smooth"
+    });
+
+}
+
+
+/* =========================
+   LOAD PROFILE WHEN APP OPENS
+========================= */
+
+window.onload = function() {
+
+    loadProfile();
+
+};
+
+</script>
+
+</body>
+    </html>
