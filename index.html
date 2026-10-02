@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nova Health</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f4f8f7;
+    color: #222;
+}
+
+header {
+    background: linear-gradient(135deg, #00a884, #00695c);
+    color: white;
+    padding: 25px 20px;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 32px;
+}
+
+header p {
+    margin-top: 8px;
+    opacity: 0.9;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+}
+
+.profile {
+    background: white;
+    padding: 20px;
+    border-radius: 18px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.profile h2 {
+    margin-bottom: 15px;
+    color: #00695c;
+}
+
+.inputs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+input {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 15px;
+}
+
+button {
+    margin-top: 15px;
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 12px;
+    background: #00a884;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #00796b;
+}
+
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.card {
+    background: white;
+    padding: 25px 18px;
+    border-radius: 18px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+}
+
+.icon {
+    font-size: 42px;
+    margin-bottom: 10px;
+}
+
+.card h3 {
+    color: #00695c;
+    margin-bottom: 7px;
+}
+
+.card p {
+    color: #666;
+    font-size: 14px;
+}
+
+#result {
+    margin-top: 20px;
+    background: white;
+    padding: 20px;
+    border-radius: 18px;
+    display: none;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+#result h2 {
+    color: #00695c;
+    margin-bottom: 12px;
+}
+
+.result-box {
+    background: #eefaf7;
+    padding: 15px;
+    border-radius: 12px;
+    margin-top: 10px;
+    line-height: 1.7;
+}
+
+footer {
+    text-align: center;
+    padding: 30px 10px;
+    color: #777
